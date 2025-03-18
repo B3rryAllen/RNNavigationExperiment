@@ -1,21 +1,28 @@
 import {Button, Text, View} from 'react-native';
 import {memo} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../AppRootStack.tsx';
+import {AppNavigatoeParamList} from '../AppNavigator.tsx';
+
+export type DetailsScreenProps = {
+    itemId: number;
+    otherParam: string;
+}
 
 export type DetailsNativeStackScreenProps = NativeStackScreenProps<
-    RootStackParamList,
-    'Home'
+    AppNavigatoeParamList,
+    'Details'
 >;
 
-const Home = memo(function Home({navigation}: DetailsNativeStackScreenProps) {
+const DetailsScreen = memo(function DetailsScreens({navigation, route}: DetailsNativeStackScreenProps) {
+
+    const { itemId, otherParam } = route.params;
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Text>Welcome to details page</Text>
-            <Button
-                title="Go to Details... again"
-                onPress={() => navigation.push('Details')}
-            />
+            <Text>Details Screen</Text>
+            <Text>itemId: {itemId}</Text>
+            <Text>otherParam: {otherParam}</Text>
+
             <Button title="Go Back" onPress={() => navigation.goBack()} />
             <Button
                 title="Go to Home"
@@ -31,4 +38,4 @@ const Home = memo(function Home({navigation}: DetailsNativeStackScreenProps) {
     );
 });
 
-export default Home;
+export default DetailsScreen;
